@@ -42,7 +42,7 @@ const Nav = () => {
         <a className="btn btn-ghost text-xl flex items-center">Internos<FaCubes /></a>
       </div>
       <div className="navbar-end">
-        <label className="flex cursor-pointer gap-2">
+        <label className=" hidden sm:flex cursor-pointer gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
