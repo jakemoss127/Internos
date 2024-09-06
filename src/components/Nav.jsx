@@ -24,7 +24,7 @@ const Nav = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow border-gray-200 bourder-2"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] border-2 border-gray-200 mt-4 w-52 p-2 shadow-md"
           >
             <li>
               <a>Documentation</a>
@@ -33,7 +33,7 @@ const Nav = () => {
               <a>About</a>
             </li>
             <li>
-              <a>GitHub</a>
+              <a target="blank" href="https://github.com/jakemoss127/Internos">GitHub</a>
             </li>
           </ul>
         </div>

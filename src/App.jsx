@@ -11,13 +11,13 @@ function App() {
         className="w-full min-h-screen flex flex-col justify-between
       p-8"
       >
-        <div className="max-w-3/5">
+        <div className="">
           <Nav />
         </div>
         <div>
           <Messages />
         </div>
-        <div className="max-h-max">
+        <div className="w-full">
           <Submission />
         </div>
       </div>
