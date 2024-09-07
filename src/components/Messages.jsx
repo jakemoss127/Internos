@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCubes } from "react-icons/fa";
 import { RiComputerFill } from "react-icons/ri";
 import { FaHouse } from "react-icons/fa6";
 import { FaDollarSign } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
 
-const Messages = () => {
+const Messages = ({ messages }) => {
   const [preview, setPreview] = useState(true);
+
+  // Hide the preview if there are any messages
+  useEffect(() => {
+    if (messages.length > 0) {
+      setPreview(false);
+    }
+  }, [messages]);
+
   return (
     <div className="flex items-center justify-center w-full">
-      {preview && (
+      {preview ? (
         <div className="flex flex-col items-center justify-center">
-          <div className="bg-gray-400 p-4 rounded-full border-2 border-gray-200 shadow-lg">
-            <FaCubes className="text-gray-600" size={30} />
+          <div className="p-4 rounded-full border-2 border-gray-200 shadow-lg">
+            <FaCubes size={30} />
           </div>
           <div className="mt-6 gap-3 text-xs hidden sm:flex">
             <div className="preview-box">
@@ -32,6 +40,24 @@ const Messages = () => {
               <p>I am looking for a marketing internship in Miami, FL</p>
             </div>
           </div>
+        </div>
+      ) : (
+        <div
+          className={`w-full max-w-2xl ${
+            messages.length % 2 === 0 ? "chat-start" : "chat-end"
+          }`} // Alternating between "chat-start" and "chat-end"
+        >
+          {messages.length === 0 ? (
+            <p>No messages yet</p>
+          ) : (
+            <div className="space-y-4">
+              {messages.map((message, index) => (
+                <div key={index} className="w-full chat-bubble max-w-2xl">
+                  <p>{message}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

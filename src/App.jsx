@@ -1,26 +1,29 @@
 import { useState } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Submission from "./components/Submission";
 import Nav from "./components/Nav";
 import Messages from "./components/Messages";
-
+import Home from "./components/Home";
+import Documentation from "./components/Documentation";
 function App() {
+  const [messages, setMessages] = useState([]);
+
+  // Function to handle new message submissions
+  const handleMessages = (newMessage) => {
+    setMessages((prevMessages) => [...prevMessages, newMessage]); // Append the new message to the list
+  };
+
   return (
     <>
-      <div
-        className="w-full min-h-screen flex flex-col justify-between
-      p-8"
-      >
-        <div className="">
-          <Nav />
+      <Router>
+        <div className="w-full flex flex-col justify-between">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/documentation" element={<Documentation />} />
+          </Routes>
         </div>
-        <div>
-          <Messages />
-        </div>
-        <div className="w-full">
-          <Submission />
-        </div>
-      </div>
+      </Router>
     </>
   );
 }

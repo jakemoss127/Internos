@@ -1,5 +1,6 @@
 import React from "react";
 import { FaCubes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
@@ -27,22 +28,27 @@ const Nav = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] border-2 border-gray-200 mt-4 w-52 p-2 shadow-md"
           >
             <li>
-              <a>Documentation</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a>About</a>
+              <Link to="/documentation">Documentation</Link>
             </li>
             <li>
-              <a target="blank" href="https://github.com/jakemoss127/Internos">GitHub</a>
+              <a target="blank" href="https://github.com/jakemoss127/Internos">
+                GitHub
+              </a>
             </li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl flex items-center">Internos<FaCubes /></a>
+        <Link to="/" className="btn btn-ghost text-xl flex items-center">
+          Internos
+          <FaCubes />
+        </Link>
       </div>
       <div className="navbar-end">
-        <label className=" hidden sm:flex cursor-pointer gap-2">
+        <label className=" hidden sm:flex cursor-pointer gap-2 scale-75">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
