@@ -15,6 +15,33 @@ const Submission = ({ onMessageSubmit }) => {
     }, 500);
   };
 
+  const handleSubmissionWithQuery = async () => {
+    if (!message) return; // Don't submit if message is empty
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:5000/search?query=${encodeURIComponent(message)}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data)
+        onMessageSubmit(data); // Pass the response to the parent component (App.jsx)
+        setMessage(""); // Clear the input after submission
+      } else {
+        console.error("Error: Failed to fetch data from the backend");
+      }
+    } catch (error) {
+      console.error("Error submitting the message:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
   return (
     <div className="flex items-center justify-center w-full min-w-full gap-2">
       <input
