@@ -43,7 +43,12 @@ vn.connect_to_postgres(
 # );
 # """)
 
-# vn.train(sql="SELECT * FROM internships")
+# vn.train(sql="SELECT sector, job_title, employer_name FROM internships")
+
+# vn.train(
+#     question="Find recent software internships", 
+#     sql="SELECT sector, job_title, employer_name, job_apply_link FROM internships WHERE sector = 'Software Engineering' AND job_posted_at_datetime_utc >= NOW() - INTERVAL '2 days';"
+# )
 
 def get_db_connection():
     conn = psycopg2.connect(connection_string)
