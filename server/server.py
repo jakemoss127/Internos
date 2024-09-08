@@ -25,31 +25,6 @@ vn.connect_to_postgres(
     port=os.getenv('port') 
 )
 
-# Training the model, only need to run these lines once
-
-# vn.train(ddl="""
-# CREATE TABLE internships (
-#     id SERIAL PRIMARY KEY,
-#     sector TEXT,
-#     employer_name TEXT,
-#     employer_website TEXT,
-#     job_title TEXT,
-#     job_apply_link TEXT,
-#     employer_logo TEXT,
-#     job_is_remote BOOLEAN,
-#     job_city TEXT,
-#     job_state TEXT,
-#     job_posted_at_datetime_utc TIMESTAMP WITH TIME ZONE NOT NULL
-# );
-# """)
-
-# vn.train(sql="SELECT sector, job_title, employer_name FROM internships")
-
-# vn.train(
-#     question="Find recent software internships", 
-#     sql="SELECT sector, job_title, employer_name, job_apply_link FROM internships WHERE sector = 'Software Engineering' AND job_posted_at_datetime_utc >= NOW() - INTERVAL '2 days';"
-# )
-
 def get_db_connection():
     conn = psycopg2.connect(connection_string)
     return conn
