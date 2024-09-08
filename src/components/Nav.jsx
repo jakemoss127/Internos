@@ -48,7 +48,7 @@ const Nav = () => {
         </Link>
       </div>
       <div className="navbar-end">
-        <label className=" hidden sm:flex cursor-pointer gap-2 scale-75">
+        <label className=" hidden sm:flex cursor-pointer gap-2 scale-90">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"

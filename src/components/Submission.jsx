@@ -1,34 +1,25 @@
 import React, { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 
-const Submission = ({ onMessageSubmit }) => {
+const Submission = ({ message, setMessage, onMessageSubmit }) => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const handleSubmission = () => {
-    if (!message) return; // Don't submit if message is empty
-    setLoading(true);
-    setTimeout(() => {
-      onMessageSubmit(message); // Pass the message to the parent component (App.jsx)
-      setMessage(""); // Clear the input after submission
-      setLoading(false);
-    }, 500);
-  };
 
   const handleSubmissionWithQuery = async () => {
     if (!message) return; // Don't submit if message is empty
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/search?query=${encodeURIComponent(message)}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
+      const response = await fetch(
+        `http://localhost:5000/search?query=${encodeURIComponent(message)}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
         onMessageSubmit(data); // Pass the response to the parent component (App.jsx)
         setMessage(""); // Clear the input after submission
       } else {
@@ -40,7 +31,6 @@ const Submission = ({ onMessageSubmit }) => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="flex items-center justify-center w-full min-w-full gap-2">
@@ -48,12 +38,12 @@ const Submission = ({ onMessageSubmit }) => {
         type="text"
         placeholder="Type here"
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={(e) => setMessage(e.target.value)} // Allow message to be updated
         className="input border-2 border-gray-200 shadow-lg w-full max-w-2xl"
       />
       <button
         className="border-gray-200 border-2 p-2 rounded-full shadow-md max-h-9 flex justify-center items-center"
-        onClick={handleSubmission}
+        onClick={handleSubmissionWithQuery}
       >
         {loading ? (
           <span className="loading loading-spinner loading-xs text-gray-400"></span>

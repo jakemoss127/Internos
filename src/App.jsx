@@ -8,7 +8,6 @@ import Home from "./components/Home";
 import Documentation from "./components/Documentation";
 function App() {
   const [messages, setMessages] = useState([]);
-
   // Function to handle new message submissions
   const handleMessages = (newMessage) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]); // Append the new message to the list
