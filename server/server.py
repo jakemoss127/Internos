@@ -32,15 +32,21 @@ def get_db_connection():
 @app.route('/search', methods=['GET'])
 def search_internships():
     query = request.args.get('query')
-    query += "You must include the following columns: job_title, employer_name, employer_logo, job_apply_link, job_city"
+    query += ". You must include the following columns: job_title, employer_name, employer_logo, job_apply_link, job_city"
     if not query:
         app.logger.error("No query provided")
         return jsonify({"error": "No query provided"}), 400
 
     try:
         app.logger.info(f"Received query: {query}")
-        sql_query = vn.generate_sql(question=query)
+        modified_query = f"{query} and YOU MUST limit the results to at most 5"
+        sql_query = vn.generate_sql(question=modified_query)
+
         app.logger.info(f"Generated SQL: {sql_query}")
+        if "delete" in sql_query.lower() or "update" in sql_query.lower():
+            return jsonify({"message": "Invalid query (delete or update)"}), 200
+
+
         
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
