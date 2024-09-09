@@ -4,13 +4,17 @@ import { RiComputerFill } from "react-icons/ri";
 import { FaHouse } from "react-icons/fa6";
 import { FaDollarSign } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
+import InternshipCard from "./InternshipCard";
+import responses from "../assets/response.js";
 
 const Messages = ({ messages, onPreviewClick }) => {
   const [preview, setPreview] = useState(true);
+  const [selectedResponse, setSelectedResponse] = useState("");
 
   useEffect(() => {
     if (messages.length > 0) {
       setPreview(false);
+      setSelectedResponse(responses[Math.floor(Math.random() * responses.length)]);
     }
   }, [messages]);
 
@@ -79,11 +83,14 @@ const Messages = ({ messages, onPreviewClick }) => {
             <p>No messages yet</p>
           ) : (
             <div className="space-y-4">
+              <div
+           className="w-full flex flex-col gap-2 max-w-2xl">
+            <div className="chat chat-start chat-bubble">{selectedResponse}</div>
               {messages.map((message, index) => (
-                <div key={index} className="w-full chat-bubble max-w-2xl">
-                  <p>{message}</p>
-                </div>
+                  console.log(message.job_title),
+                <InternshipCard key={index} job_city={message.job_city} job_title={message.job_title} employer_name={message.employer_name} employer_logo={message.employer_logo} job_apply_link={message.job_apply_link}/>
               ))}
+              </div>
             </div>
           )}
         </div>

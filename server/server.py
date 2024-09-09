@@ -32,6 +32,7 @@ def get_db_connection():
 @app.route('/search', methods=['GET'])
 def search_internships():
     query = request.args.get('query')
+    query += "You must include the following columns: job_title, employer_name, employer_logo, job_apply_link, job_city"
     if not query:
         app.logger.error("No query provided")
         return jsonify({"error": "No query provided"}), 400

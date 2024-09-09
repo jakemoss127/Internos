@@ -8,20 +8,7 @@ import InternshipCard from "./InternshipCard";
 function Home() {
   const [message, setMessage] = useState(""); // Store the input message
   const [messages, setMessages] = useState([]); // Store the list of messages
-
-  const internships = [
-    {
-      id: 8691,
-      employer_name: "Veolia North America",
-      employer_logo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzGCe4Swr6zgscD5UuEgHjBJnBkHu2SDrGeFaE&s=0",
-      job_title: "Finance Intern",
-      job_apply_link:
-        "https://www.lgbtconnect.com/job/finance-intern-690327?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
-      job_is_remote: false,
-    },
-    // Add more internships here
-  ];
+  const [resultArr, setResultArr] = useState([]); // Store the list of results
 
   // Function to handle new message submissions
   const handleMessages = (newMessage) => {
@@ -37,13 +24,14 @@ function Home() {
     <div className="w-full min-h-screen flex flex-col justify-between p-8">
       <Nav />
       <div>
-        <Messages messages={messages} onPreviewClick={handlePreviewClick} />
+        <Messages messages={resultArr} onPreviewClick={handlePreviewClick} />
       </div>
       <div className="w-full">
         <Submission
           message={message}
           setMessage={setMessage}
           onMessageSubmit={handleMessages}
+          setResultArr={setResultArr}
         />
       </div>
     </div>

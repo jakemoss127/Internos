@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 
-const Submission = ({ message, setMessage, onMessageSubmit }) => {
+const Submission = ({ message, setMessage, onMessageSubmit, setResultArr }) => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmissionWithQuery = async () => {
-    if (!message) return; // Don't submit if message is empty
+    if (!message) return; // Don't submit if the message is empty
     setLoading(true);
+
     try {
       const response = await fetch(
         `http://localhost:5000/search?query=${encodeURIComponent(message)}`,
@@ -20,7 +21,16 @@ const Submission = ({ message, setMessage, onMessageSubmit }) => {
 
       if (response.ok) {
         const data = await response.json();
-        onMessageSubmit(data); // Pass the response to the parent component (App.jsx)
+
+        if (data.length === 0) {
+          console.warn("No results found for the query.");
+          onMessageSubmit([]); // No results, send an empty array to the parent
+        } else {
+          console.log("Received data from backend:", data);
+          onMessageSubmit(data); // Pass the results to the parent component
+          setResultArr(data); // Store the results in the state
+        }
+
         setMessage(""); // Clear the input after submission
       } else {
         console.error("Error: Failed to fetch data from the backend");
@@ -28,7 +38,7 @@ const Submission = ({ message, setMessage, onMessageSubmit }) => {
     } catch (error) {
       console.error("Error submitting the message:", error);
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensure loading is set to false after the request is complete
     }
   };
 
