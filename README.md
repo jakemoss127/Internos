@@ -1,8 +1,31 @@
-# React + Vite
+# Internos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Internos is an AI-powered chatbot designed to help people find internships effectively and efficiently.
 
-Currently, two official plugins are available:
+![image](https://github.com/user-attachments/assets/1c34d8df-000e-4fe6-980c-6149d48907d5)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **AI Chatbot Interface:** Interact with Internos using natural language to search for internships.
+- **Personalized Recommendations:** Receive tailored internship suggestions based on your preferences.
+- **User-friendly Interface:** Easy-to-use design for a seamless user experience.
+
+## Technologies Used
+
+- **Frontend:** React.js, DaisyUI
+- **Backend:** Node.js, Flask
+- **Database:** PostgreSQL
+- **Deployment:** Vercel, Neon
+
+- ## Contributing
+
+Contributions are welcome! Please follow our [contributing guidelines].
+
+## Contact
+
+For any inquiries, please contact [jacobmoss@ufl.edu](mailto:your-email@example.com).
+
+## Acknowledgments
+
+- Thanks to everyone for their support and contributions.
+- Special thanks to the open-source community for their resources and tools.
