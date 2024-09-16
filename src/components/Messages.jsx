@@ -85,7 +85,7 @@ const Messages = ({ messages, onPreviewClick }) => {
             <div className="space-y-4">
               <div
            className="w-full flex flex-col gap-2 max-w-2xl">
-            <div className="chat chat-start chat-bubble">{selectedResponse}</div>
+            <div className="chat chat-end chat-bubble">{selectedResponse}</div>
               {messages.map((message, index) => (
                   console.log(message.job_title),
                 <InternshipCard key={index} job_city={message.job_city} job_title={message.job_title} employer_name={message.employer_name} employer_logo={message.employer_logo} job_apply_link={message.job_apply_link}/>

@@ -1,11 +1,12 @@
 import React from "react";
 import { FaCubes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 const Nav = () => {
   return (
     <div className="navbar bg-base-100 border-2 border-gray-200 rounded-xl shadow-lg">
-      <div className="navbar-start">
+      <div className="navbar-start gap-2">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <svg
@@ -40,15 +41,7 @@ const Nav = () => {
             </li>
           </ul>
         </div>
-      </div>
-      <div className="navbar-center">
-        <Link to="/" className="btn btn-ghost text-xl flex items-center">
-          Internos
-          <FaCubes />
-        </Link>
-      </div>
-      <div className="navbar-end">
-        <label className=" hidden sm:flex cursor-pointer gap-2 scale-90">
+        <label className="scale-75 hidden sm:flex cursor-pointer gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -82,6 +75,18 @@ const Nav = () => {
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </label>
+      </div>
+      <div className="navbar-center">
+        <Link to="/" className="btn btn-ghost text-xl flex items-center">
+          Internos
+          <FaCubes />
+        </Link>
+      </div>
+      <div className="navbar-end">
+        <button className="p-2 rounded-full shadow-md max-h-9 flex justify-center items-center mr-2">
+          {/* Add the user's google prof picture here if logged in, instead of the Icon  */}
+          <FaUser/>
+        </button>
       </div>
     </div>
   );

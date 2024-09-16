@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 
 const Submission = ({ message, setMessage, onMessageSubmit, setResultArr }) => {
@@ -7,10 +7,11 @@ const Submission = ({ message, setMessage, onMessageSubmit, setResultArr }) => {
   const handleSubmissionWithQuery = async () => {
     if (!message) return; // Don't submit if the message is empty
     setLoading(true);
-
     try {
       const response = await fetch(
-        `http://localhost:5000/search?query=${encodeURIComponent(message)}`,
+        `${
+          import.meta.env.VITE_REACT_APP_RAILWAY
+        }/search?query=${encodeURIComponent(message)}`,
         {
           method: "GET",
           headers: {
@@ -20,20 +21,26 @@ const Submission = ({ message, setMessage, onMessageSubmit, setResultArr }) => {
       );
 
       if (response.ok) {
-        const data = await response.json();
-
-        if (data.length === 0) {
-          console.warn("No results found for the query.");
-          onMessageSubmit([]); // No results, send an empty array to the parent
+        const contentType = response.headers.get("Content-Type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          if (data.length === 0) {
+            console.warn("No results found for the query.");
+            onMessageSubmit([]); // No results, send an empty array to the parent
+          } else {
+            console.log("Received data from backend:", data);
+            onMessageSubmit(data); // Pass the results to the parent component
+            setResultArr(data); // Store the results in the state
+          }
         } else {
-          console.log("Received data from backend:", data);
-          onMessageSubmit(data); // Pass the results to the parent component
-          setResultArr(data); // Store the results in the state
+          console.error("Expected JSON response but received:", contentType);
+          const errorText = await response.text();
+          console.error("Response text:", errorText);
         }
-
-        setMessage(""); // Clear the input after submission
       } else {
-        console.error("Error: Failed to fetch data from the backend");
+        console.error(
+          `Error: Received ${response.status} ${response.statusText}`
+        );
       }
     } catch (error) {
       console.error("Error submitting the message:", error);
