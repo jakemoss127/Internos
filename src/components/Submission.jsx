@@ -28,7 +28,6 @@ const Submission = ({ message, setMessage, onMessageSubmit, setResultArr }) => {
             console.warn("No results found for the query.");
             onMessageSubmit([]); // No results, send an empty array to the parent
           } else {
-            console.log("Received data from backend:", data);
             onMessageSubmit(data); // Pass the results to the parent component
             setResultArr(data); // Store the results in the state
           }
