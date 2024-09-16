@@ -7,9 +7,6 @@ const Submission = ({ message, setMessage, onMessageSubmit, setResultArr }) => {
   const handleSubmissionWithQuery = async () => {
     if (!message) return; // Don't submit if the message is empty
     setLoading(true);
-    useEffect(() => {
-      console.log("Message:", import.meta.env);
-    }, []);
     try {
       const response = await fetch(
         `${
